@@ -1,0 +1,34 @@
+# Production profile: every secret must come from the environment. Missing values fail startup.
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  flyway:
+    baseline-on-migrate: false
+
+server:
+  # Behind a TLS-terminating proxy/load balancer (Render, Fly.io, Railway, nginx...).
+  forward-headers-strategy: native
+  servlet:
+    session:
+      cookie:
+        secure: true
+
+vaadin:
+  productionMode: true
+
+springdoc:
+  api-docs:
+    enabled: ${FINSIGHT_API_DOCS_ENABLED:false}
+  swagger-ui:
+    enabled: ${FINSIGHT_API_DOCS_ENABLED:false}
+
+finsight:
+  jwt:
+    secret: ${FINSIGHT_JWT_SECRET}
+
+logging:
+  level:
+    com.finsight: INFO
+    root: WARN

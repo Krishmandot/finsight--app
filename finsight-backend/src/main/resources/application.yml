@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: finsight-backend
+  # Local development reads secrets from a git-ignored .env file in the working directory (see .env.example).
+  # Real environment variables always take precedence.
+  config:
+    import: optional:file:.env[.properties]
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/finsight}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+      minimum-idle: 2
+      connection-timeout: 20000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+          batch_size: 50
+        order_inserts: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        same-site: lax
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+vaadin:
+  # Only scan our own packages for routes; speeds up startup.
+  allowed-packages: com.finsight
+  launch-browser: false
+
+finsight:
+  jwt:
+    # Development fallback only. The prod profile refuses to start with this value.
+    secret: ${FINSIGHT_JWT_SECRET:changeme-dev-only-secret-not-for-production-use-0123456789}
+    access-token-expiry-ms: 900000       # 15 minutes
+    refresh-token-expiry-days: 7
+  security:
+    login:
+      max-failures: 5
+      lockout-minutes: 15
+
+logging:
+  level:
+    com.finsight: INFO
+    org.hibernate.SQL: OFF
+    org.springframework.security: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

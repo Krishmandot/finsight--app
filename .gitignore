@@ -1,0 +1,29 @@
+# Secrets - never commit these
+.env
+.env.*
+!.env.example
+
+# Build output
+**/target/
+*.class
+*.jar
+
+# Vaadin generated files (recreated automatically on every build)
+finsight-backend/src/main/frontend/generated/
+finsight-backend/src/main/bundles/
+finsight-backend/node_modules/
+finsight-backend/package.json
+finsight-backend/package-lock.json
+finsight-backend/vite.config.ts
+finsight-backend/vite.generated.ts
+finsight-backend/tsconfig.json
+finsight-backend/types.d.ts
+finsight-backend/pnpm-lock.yaml
+
+# Editors / OS / logs
+.idea/
+.vscode/
+*.log
+startup-error.txt
+.DS_Store
+Thumbs.db

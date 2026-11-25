@@ -1,0 +1,1699 @@
+/* =====================================================================================================
+   FinSight design system
+   - Warm neutral surfaces, near-black ink, one emerald accent. Hairline borders instead of shadows.
+   - Lumo (Vaadin's theme) is re-tokenised here so every Vaadin component follows the same system.
+   - Light and dark are both defined; dark is applied with theme="dark" on <html>.
+   ===================================================================================================== */
+
+html:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --fs-bg: #f5f5f2;
+  --fs-surface: #ffffff;
+  --fs-surface-2: #f8f8f6;
+  --fs-surface-hover: #f1f1ed;
+  --fs-line: #e5e4df;
+  --fs-line-strong: #d3d2cb;
+
+  /* Ink */
+  --fs-ink: #16181b;
+  --fs-ink-2: #5a5f67;
+  --fs-ink-3: #868b93;
+  --fs-ink-inverse: #ffffff;
+
+  /* Brand */
+  --fs-accent: #1d6b4f;
+  --fs-accent-hover: #175a42;
+  --fs-accent-soft: #e6f0eb;
+
+  /* Status (always paired with an icon or label) */
+  --fs-pos: #0f7a3d;
+  --fs-pos-soft: #e7f3eb;
+  --fs-neg: #b42318;
+  --fs-neg-soft: #fbebea;
+  --fs-warn: #8f5400;
+  --fs-warn-soft: #fcf1dd;
+  --fs-info: #2457a6;
+  --fs-info-soft: #e8eef9;
+  --fs-neutral-soft: #eeeeea;
+
+  /* Data visualisation (validated categorical pair + diverging pair) */
+  --fs-series-income: #257de0;
+  --fs-series-spend: #f47230;
+  --fs-diverge-pos: #257de0;
+  --fs-diverge-neg: #ec4647;
+  --fs-grid: #ecebe6;
+  --fs-axis: #c2c1ba;
+  --fs-chart-surface: var(--fs-surface);
+
+  /* Shape & rhythm */
+  --fs-radius: 12px;
+  --fs-radius-m: 8px;
+  --fs-radius-s: 6px;
+  --fs-shadow-overlay: 0 1px 2px rgba(16, 18, 20, 0.06), 0 12px 32px -8px rgba(16, 18, 20, 0.18);
+  --fs-content-width: 1200px;
+  --fs-gutter: 32px;
+
+  /* Lumo mapping */
+  --lumo-font-family: "Inter", "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --lumo-font-size-xxxl: 1.875rem;
+  --lumo-font-size-xxl: 1.5rem;
+  --lumo-font-size-xl: 1.25rem;
+  --lumo-font-size-l: 1.0625rem;
+  --lumo-font-size-m: 0.9375rem;
+  --lumo-font-size-s: 0.8125rem;
+  --lumo-font-size-xs: 0.75rem;
+  --lumo-line-height-m: 1.55;
+  --lumo-base-color: var(--fs-surface);
+  --lumo-body-text-color: var(--fs-ink);
+  --lumo-header-text-color: var(--fs-ink);
+  --lumo-secondary-text-color: var(--fs-ink-2);
+  --lumo-tertiary-text-color: var(--fs-ink-3);
+  --lumo-disabled-text-color: #b1b4b9;
+  --lumo-primary-color: var(--fs-ink);
+  --lumo-primary-color-50pct: rgba(22, 24, 27, 0.45);
+  --lumo-primary-color-10pct: rgba(22, 24, 27, 0.07);
+  --lumo-primary-text-color: var(--fs-accent);
+  --lumo-primary-contrast-color: #ffffff;
+  --lumo-error-color: var(--fs-neg);
+  --lumo-error-text-color: var(--fs-neg);
+  --lumo-error-color-10pct: rgba(180, 35, 24, 0.08);
+  --lumo-success-color: var(--fs-pos);
+  --lumo-success-text-color: var(--fs-pos);
+  --lumo-border-radius-s: 6px;
+  --lumo-border-radius-m: 8px;
+  --lumo-border-radius-l: 12px;
+  --lumo-size-m: 2.375rem;
+  --lumo-size-s: 2rem;
+  --lumo-box-shadow-m: var(--fs-shadow-overlay);
+  --lumo-box-shadow-l: var(--fs-shadow-overlay);
+  --lumo-box-shadow-xl: var(--fs-shadow-overlay);
+}
+
+html:root[theme~="dark"] {
+  color-scheme: dark;
+  --fs-bg: #0f1012;
+  --fs-surface: #17181b;
+  --fs-surface-2: #1c1d21;
+  --fs-surface-hover: #222327;
+  --fs-line: #2a2c30;
+  --fs-line-strong: #3a3c41;
+  --fs-ink: #ededeb;
+  --fs-ink-2: #a2a6ad;
+  --fs-ink-3: #767b83;
+  --fs-ink-inverse: #121315;
+  --fs-accent: #63c39a;
+  --fs-accent-hover: #7dd0ac;
+  --fs-accent-soft: #1b2d25;
+  --fs-pos: #58c37f;
+  --fs-pos-soft: #18291f;
+  --fs-neg: #f08a80;
+  --fs-neg-soft: #33201f;
+  --fs-warn: #f0b75a;
+  --fs-warn-soft: #30261a;
+  --fs-info: #8db4f2;
+  --fs-info-soft: #1c2433;
+  --fs-neutral-soft: #24262a;
+  --fs-series-income: #338ced;
+  --fs-series-spend: #e76624;
+  --fs-diverge-pos: #338ced;
+  --fs-diverge-neg: #eb6263;
+  --fs-grid: #26282c;
+  --fs-axis: #46484e;
+  --lumo-base-color: var(--fs-surface);
+  --lumo-body-text-color: var(--fs-ink);
+  --lumo-header-text-color: var(--fs-ink);
+  --lumo-secondary-text-color: var(--fs-ink-2);
+  --lumo-tertiary-text-color: var(--fs-ink-3);
+  --lumo-primary-color: #ededeb;
+  --lumo-primary-color-50pct: rgba(237, 237, 235, 0.45);
+  --lumo-primary-color-10pct: rgba(237, 237, 235, 0.08);
+  --lumo-primary-contrast-color: #121315;
+  --lumo-primary-text-color: var(--fs-accent);
+  --lumo-contrast-5pct: rgba(255, 255, 255, 0.04);
+  --lumo-contrast-10pct: rgba(255, 255, 255, 0.08);
+  --fs-shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -8px rgba(0, 0, 0, 0.6);
+}
+
+html, body {
+  background: var(--fs-bg);
+  color: var(--fs-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.012em;
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------------------------- App shell */
+
+vaadin-app-layout {
+  background: var(--fs-bg);
+  --vaadin-app-layout-drawer-width: 248px;
+}
+
+vaadin-app-layout::part(drawer) {
+  background: var(--fs-surface);
+  border-inline-end: 1px solid var(--fs-line);
+}
+
+vaadin-app-layout::part(navbar) {
+  background: var(--fs-surface);
+  border-bottom: 1px solid var(--fs-line);
+  box-shadow: none;
+  min-height: 56px;
+}
+
+vaadin-app-layout[primary-section="drawer"]:not([overlay])::part(navbar) {
+  display: none;
+}
+
+.fs-drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 12px 16px;
+  box-sizing: border-box;
+}
+
+.fs-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 22px;
+  color: var(--fs-ink);
+  text-decoration: none;
+}
+
+.fs-brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--fs-ink);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.fs-brand-mark svg {
+  width: 14px;
+  height: 14px;
+}
+
+.fs-brand-name {
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.fs-nav-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fs-ink-3);
+  padding: 14px 12px 6px;
+}
+
+vaadin-side-nav {
+  width: 100%;
+}
+
+vaadin-side-nav-item::part(link) {
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: var(--fs-radius-m);
+  color: var(--fs-ink-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  gap: 10px;
+}
+
+vaadin-side-nav-item::part(link):hover {
+  background: var(--fs-surface-hover);
+  color: var(--fs-ink);
+}
+
+vaadin-side-nav-item[current]::part(link) {
+  background: var(--fs-surface-hover);
+  color: var(--fs-ink);
+  font-weight: 600;
+}
+
+vaadin-side-nav-item vaadin-icon {
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.fs-nav-count {
+  margin-inline-start: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: var(--fs-ink);
+  color: var(--fs-ink-inverse);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-drawer-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--fs-line);
+  padding: 12px 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fs-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--fs-accent-soft);
+  color: var(--fs-accent);
+  display: grid;
+  place-items: center;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  flex: none;
+}
+
+.fs-user {
+  min-width: 0;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.fs-user-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-user-email {
+  font-size: 0.75rem;
+  color: var(--fs-ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-mobile-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding-inline-end: 12px;
+}
+
+.fs-mobile-bar .fs-brand {
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------------------- Page */
+
+.fs-page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--fs-content-width) + 2 * var(--fs-gutter));
+  margin: 0 auto;
+  padding: 28px var(--fs-gutter) 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fs-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.fs-page-title {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0;
+  font-weight: 650;
+}
+
+.fs-page-subtitle {
+  margin: 4px 0 0;
+  color: var(--fs-ink-2);
+  font-size: 0.9375rem;
+}
+
+.fs-page-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ----------------------------------------------------------------------------- Panels */
+
+.fs-panel {
+  background: var(--fs-surface);
+  border: 1px solid var(--fs-line);
+  border-radius: var(--fs-radius);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px 0;
+  min-height: 32px;
+}
+
+.fs-panel-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.fs-panel-caption {
+  font-size: 0.8125rem;
+  color: var(--fs-ink-3);
+  margin: 2px 0 0;
+}
+
+.fs-panel-body {
+  padding: 16px 20px 20px;
+  min-width: 0;
+}
+
+.fs-panel-body.flush {
+  padding: 8px 0 0;
+}
+
+.fs-grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.fs-grid-2.even {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* ----------------------------------------------------------------------------- KPI strip */
+
+.fs-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--fs-surface);
+  border: 1px solid var(--fs-line);
+  border-radius: var(--fs-radius);
+  overflow: hidden;
+}
+
+.fs-kpis.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fs-kpi {
+  padding: 18px 20px 18px;
+  border-inline-start: 1px solid var(--fs-line);
+  min-width: 0;
+}
+
+.fs-kpi:first-child {
+  border-inline-start: none;
+}
+
+.fs-kpi-label {
+  font-size: 0.8125rem;
+  color: var(--fs-ink-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fs-kpi-key {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.fs-kpi-value {
+  font-size: 1.625rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  margin-top: 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fs-kpi-meta {
+  margin-top: 6px;
+  font-size: 0.8125rem;
+  color: var(--fs-ink-3);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fs-delta {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-delta.good { color: var(--fs-pos); }
+.fs-delta.bad { color: var(--fs-neg); }
+.fs-delta.flat { color: var(--fs-ink-2); }
+
+.fs-pos { color: var(--fs-pos); }
+.fs-neg { color: var(--fs-neg); }
+.fs-muted { color: var(--fs-ink-2); }
+.fs-faint { color: var(--fs-ink-3); }
+.fs-num { font-variant-numeric: tabular-nums; }
+.fs-strong { font-weight: 600; }
+
+/* ----------------------------------------------------------------------------- Badges */
+
+.fs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 11px;
+  font-size: 0.75rem;
+  font-weight: 550;
+  white-space: nowrap;
+  background: var(--fs-neutral-soft);
+  color: var(--fs-ink-2);
+  line-height: 1;
+}
+
+.fs-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.9;
+}
+
+.fs-badge.plain::before { display: none; }
+.fs-badge.pending { background: var(--fs-warn-soft); color: var(--fs-warn); }
+.fs-badge.approved { background: var(--fs-pos-soft); color: var(--fs-pos); }
+.fs-badge.rejected { background: var(--fs-neg-soft); color: var(--fs-neg); }
+.fs-badge.info { background: var(--fs-info-soft); color: var(--fs-info); }
+.fs-badge.accent { background: var(--fs-accent-soft); color: var(--fs-accent); }
+
+/* ----------------------------------------------------------------------------- Buttons & fields */
+
+vaadin-button {
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+}
+
+vaadin-button:not([theme~="primary"]):not([theme~="tertiary"]):not([theme~="tertiary-inline"]):not([theme~="error"]) {
+  background: var(--fs-surface);
+  color: var(--fs-ink);
+  box-shadow: inset 0 0 0 1px var(--fs-line-strong);
+}
+
+vaadin-button:not([theme~="primary"]):not([theme~="tertiary"]):not([theme~="tertiary-inline"]):hover::before {
+  opacity: 0.04;
+}
+
+vaadin-button[theme~="tertiary"] {
+  color: var(--fs-ink-2);
+}
+
+vaadin-button[theme~="tertiary"]:hover {
+  color: var(--fs-ink);
+}
+
+vaadin-button[theme~="error"][theme~="primary"] {
+  background: var(--fs-neg);
+  color: #fff;
+}
+
+vaadin-button[theme~="accent"] {
+  background: var(--fs-accent);
+  color: #fff;
+  box-shadow: none;
+}
+
+vaadin-text-field, vaadin-email-field, vaadin-password-field, vaadin-big-decimal-field, vaadin-number-field,
+vaadin-date-picker, vaadin-combo-box, vaadin-multi-select-combo-box, vaadin-select, vaadin-text-area {
+  --vaadin-input-field-border-width: 1px;
+  --vaadin-input-field-border-color: var(--fs-line-strong);
+  --vaadin-input-field-background: var(--fs-surface);
+  --vaadin-input-field-hover-highlight-opacity: 0;
+}
+
+vaadin-text-field::part(input-field), vaadin-email-field::part(input-field), vaadin-password-field::part(input-field),
+vaadin-big-decimal-field::part(input-field), vaadin-number-field::part(input-field),
+vaadin-date-picker::part(input-field), vaadin-combo-box::part(input-field),
+vaadin-multi-select-combo-box::part(input-field), vaadin-select::part(input-field), vaadin-text-area::part(input-field) {
+  background: var(--fs-surface);
+  box-shadow: inset 0 0 0 1px var(--fs-line-strong);
+}
+
+vaadin-text-field:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-big-decimal-field:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-date-picker:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-combo-box:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-multi-select-combo-box:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-select:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-text-area:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-email-field:hover:not([readonly]):not([focused])::part(input-field),
+vaadin-password-field:hover:not([readonly]):not([focused])::part(input-field) {
+  box-shadow: inset 0 0 0 1px var(--fs-ink-3);
+}
+
+vaadin-text-field[invalid]::part(input-field), vaadin-big-decimal-field[invalid]::part(input-field),
+vaadin-date-picker[invalid]::part(input-field), vaadin-combo-box[invalid]::part(input-field),
+vaadin-email-field[invalid]::part(input-field), vaadin-password-field[invalid]::part(input-field),
+vaadin-text-area[invalid]::part(input-field) {
+  box-shadow: inset 0 0 0 1px var(--fs-neg);
+  background: var(--fs-surface);
+}
+
+vaadin-text-field::part(label), vaadin-email-field::part(label), vaadin-password-field::part(label),
+vaadin-big-decimal-field::part(label), vaadin-date-picker::part(label), vaadin-combo-box::part(label),
+vaadin-multi-select-combo-box::part(label), vaadin-select::part(label), vaadin-text-area::part(label),
+vaadin-radio-group::part(label), vaadin-checkbox-group::part(label) {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--fs-ink-2);
+}
+
+vaadin-checkbox::part(checkbox) {
+  border-radius: 5px;
+}
+
+/* ----------------------------------------------------------------------------- Segmented control */
+
+.fs-segmented {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  background: var(--fs-neutral-soft);
+  border-radius: 9px;
+  flex-wrap: wrap;
+}
+
+.fs-segmented button {
+  all: unset;
+  box-sizing: border-box;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--fs-ink-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.fs-segmented button:hover {
+  color: var(--fs-ink);
+}
+
+.fs-segmented button[aria-pressed="true"] {
+  background: var(--fs-surface);
+  color: var(--fs-ink);
+  box-shadow: 0 1px 2px rgba(16, 18, 20, 0.08), 0 0 0 1px var(--fs-line);
+}
+
+.fs-segmented button:focus-visible {
+  outline: 2px solid var(--fs-accent);
+  outline-offset: 1px;
+}
+
+/* ----------------------------------------------------------------------------- Toolbar / filters */
+
+.fs-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.fs-toolbar > .grow {
+  flex: 1 1 220px;
+  min-width: 180px;
+}
+
+.fs-filter-summary {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--fs-ink-2);
+}
+
+/* ----------------------------------------------------------------------------- Grid (tables) */
+
+vaadin-grid.fs-table {
+  border: none;
+  background: transparent;
+  --lumo-size-m: 2.5rem;
+  font-size: 0.875rem;
+}
+
+vaadin-grid.fs-table::part(header-cell) {
+  background: var(--fs-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fs-ink-3);
+  min-height: 36px;
+  border-bottom: 1px solid var(--fs-line);
+}
+
+vaadin-grid.fs-table::part(cell) {
+  border-top: 1px solid var(--fs-line);
+  background: var(--fs-surface);
+}
+
+vaadin-grid.fs-table::part(row):hover {
+  cursor: pointer;
+}
+
+vaadin-grid.fs-table::part(body-cell) {
+  min-height: 48px;
+}
+
+vaadin-grid.fs-table::part(selected-row-cell) {
+  background-color: var(--fs-accent-soft);
+}
+
+vaadin-grid.fs-table vaadin-grid-cell-content {
+  padding-block: 6px;
+}
+
+.fs-cell-primary {
+  font-weight: 550;
+  color: var(--fs-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-cell-secondary {
+  font-size: 0.75rem;
+  color: var(--fs-ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+.fs-amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fs-amount.in { color: var(--fs-pos); }
+.fs-amount.muted { color: var(--fs-ink-3); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* Simple list rows (dashboard recent activity, category lists) */
+.fs-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-list-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 20px;
+  border-top: 1px solid var(--fs-line);
+  text-decoration: none;
+  color: inherit;
+}
+
+.fs-list-row:first-child {
+  border-top: none;
+}
+
+.fs-list-row.clickable {
+  cursor: pointer;
+}
+
+.fs-list-row.clickable:hover {
+  background: var(--fs-surface-2);
+}
+
+.fs-list-end {
+  text-align: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.fs-panel-footer {
+  border-top: 1px solid var(--fs-line);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8125rem;
+}
+
+.fs-link {
+  color: var(--fs-accent);
+  font-weight: 550;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.fs-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ----------------------------------------------------------------------------- Insights */
+
+.fs-insights {
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-insight {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--fs-line);
+}
+
+.fs-insight:first-child {
+  border-top: none;
+}
+
+.fs-insight-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: var(--fs-neutral-soft);
+  color: var(--fs-ink-2);
+  margin-top: 1px;
+}
+
+.fs-insight-icon vaadin-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.fs-insight.positive .fs-insight-icon { background: var(--fs-pos-soft); color: var(--fs-pos); }
+.fs-insight.warning .fs-insight-icon { background: var(--fs-warn-soft); color: var(--fs-warn); }
+
+.fs-insight-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.fs-insight-detail {
+  font-size: 0.8125rem;
+  color: var(--fs-ink-2);
+  margin-top: 2px;
+}
+
+/* ----------------------------------------------------------------------------- Category bars */
+
+.fs-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fs-bar-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: baseline;
+  font-size: 0.8125rem;
+}
+
+.fs-bar-row.clickable {
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.fs-bar-row.clickable:hover .fs-bar-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fs-bar-name {
+  font-weight: 550;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-bar-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fs-bar-value .fs-faint {
+  font-weight: 500;
+  margin-inline-start: 6px;
+}
+
+.fs-bar-track {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--fs-neutral-soft);
+  overflow: hidden;
+}
+
+.fs-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--fs-series-spend);
+  min-width: 3px;
+}
+
+.fs-bar-fill.income {
+  background: var(--fs-series-income);
+}
+
+/* ----------------------------------------------------------------------------- Charts */
+
+.fs-chart {
+  width: 100%;
+  position: relative;
+}
+
+.fs-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.fs-chart text {
+  font-family: var(--lumo-font-family);
+  fill: var(--fs-ink-3);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-chart .label-strong {
+  fill: var(--fs-ink);
+  font-weight: 600;
+}
+
+.fs-chart .grid {
+  stroke: var(--fs-grid);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.fs-chart .axis {
+  stroke: var(--fs-axis);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.fs-chart .s-income { fill: var(--fs-series-income); }
+.fs-chart .s-spend { fill: var(--fs-series-spend); }
+.fs-chart .s-pos { fill: var(--fs-diverge-pos); }
+.fs-chart .s-neg { fill: var(--fs-diverge-neg); }
+.fs-chart .line-net { fill: none; stroke: var(--fs-ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.fs-chart .dot-net { fill: var(--fs-ink); stroke: var(--fs-chart-surface); stroke-width: 2; }
+.fs-chart .area-net { fill: var(--fs-ink); opacity: 0.06; }
+
+.fs-chart .line-net, .fs-chart .dot-net, .fs-chart text {
+  pointer-events: none;
+}
+
+.fs-chart-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.fs-chart-scroll svg {
+  min-width: 480px;
+}
+
+.fs-chart .hit {
+  fill: transparent;
+  cursor: default;
+  outline: none;
+}
+
+.fs-chart .hit:hover, .fs-chart .hit:focus-visible {
+  fill: var(--fs-ink);
+  fill-opacity: 0.04;
+}
+
+.fs-chart .hit:focus-visible {
+  stroke: var(--fs-accent);
+  stroke-width: 1.5;
+}
+
+.fs-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--fs-ink-2);
+}
+
+.fs-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fs-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.fs-legend i.line {
+  height: 2px;
+  border-radius: 1px;
+  width: 14px;
+}
+
+.fs-tooltip {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  background: var(--fs-surface);
+  color: var(--fs-ink);
+  border: 1px solid var(--fs-line);
+  border-radius: 8px;
+  box-shadow: var(--fs-shadow-overlay);
+  padding: 8px 10px;
+  font-size: 0.8125rem;
+  min-width: 140px;
+  max-width: 260px;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 80ms ease, transform 80ms ease;
+  font-family: var(--lumo-font-family);
+}
+
+.fs-tooltip.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fs-tooltip .t-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--fs-ink-2);
+  font-size: 0.75rem;
+}
+
+.fs-tooltip .t-row {
+  display: grid;
+  grid-template-columns: 12px auto 1fr;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.fs-tooltip .t-row b {
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.fs-tooltip .t-key {
+  width: 10px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--fs-ink-3);
+}
+
+.fs-tooltip .t-key.income { background: var(--fs-series-income); }
+.fs-tooltip .t-key.spend { background: var(--fs-series-spend); }
+.fs-tooltip .t-key.pos { background: var(--fs-diverge-pos); }
+.fs-tooltip .t-key.neg { background: var(--fs-diverge-neg); }
+
+.fs-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-data-table th {
+  text-align: start;
+  font-weight: 600;
+  color: var(--fs-ink-3);
+  font-size: 0.75rem;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--fs-line);
+}
+
+.fs-data-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--fs-line);
+}
+
+.fs-data-table th.num, .fs-data-table td.num {
+  text-align: end;
+}
+
+.fs-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+vaadin-details.fs-details::part(summary) {
+  font-size: 0.8125rem;
+  color: var(--fs-ink-2);
+  font-weight: 550;
+}
+
+/* ----------------------------------------------------------------------------- Empty / notice states */
+
+.fs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  gap: 6px;
+}
+
+.fs-empty-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--fs-neutral-soft);
+  color: var(--fs-ink-2);
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+}
+
+.fs-empty-icon vaadin-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.fs-empty-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.fs-empty-text {
+  color: var(--fs-ink-2);
+  font-size: 0.875rem;
+  max-width: 420px;
+}
+
+.fs-empty-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fs-notice {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: var(--fs-radius-m);
+  background: var(--fs-info-soft);
+  color: var(--fs-info);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.fs-notice vaadin-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-top: 2px;
+}
+
+.fs-notice.warning { background: var(--fs-warn-soft); color: var(--fs-warn); }
+.fs-notice.error { background: var(--fs-neg-soft); color: var(--fs-neg); }
+.fs-notice.success { background: var(--fs-pos-soft); color: var(--fs-pos); }
+.fs-notice.neutral { background: var(--fs-neutral-soft); color: var(--fs-ink-2); }
+
+.fs-notice-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.fs-notice-body b {
+  font-weight: 600;
+}
+
+.fs-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--fs-line);
+  border-radius: var(--fs-radius);
+  background: var(--fs-surface);
+  flex-wrap: wrap;
+}
+
+.fs-callout-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+}
+
+/* ----------------------------------------------------------------------------- Dialogs */
+
+vaadin-dialog-overlay::part(overlay) {
+  border-radius: 14px;
+  border: 1px solid var(--fs-line);
+}
+
+vaadin-dialog-overlay::part(header) {
+  padding: 18px 24px 4px;
+}
+
+vaadin-dialog-overlay::part(title) {
+  font-size: 1.0625rem;
+  font-weight: 650;
+}
+
+vaadin-dialog-overlay::part(content) {
+  padding: 12px 24px 8px;
+}
+
+vaadin-dialog-overlay::part(footer) {
+  padding: 12px 24px 18px;
+  gap: 8px;
+  background: transparent;
+}
+
+.fs-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 16px;
+  width: min(560px, 82vw);
+}
+
+.fs-form > .full {
+  grid-column: 1 / -1;
+}
+
+.fs-dl {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 10px 16px;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.fs-dl dt {
+  color: var(--fs-ink-3);
+}
+
+.fs-dl dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.fs-detail-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--fs-line);
+  width: min(520px, 82vw);
+}
+
+.fs-detail-amount {
+  font-size: 1.75rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-detail-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ----------------------------------------------------------------------------- Auth screens */
+
+.fs-auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  background: var(--fs-surface);
+}
+
+.fs-auth-aside {
+  background: #121a16;
+  color: #e9efe9;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.fs-auth-aside .fs-brand {
+  color: #f3f5f2;
+  padding: 0;
+}
+
+.fs-auth-aside .fs-brand-mark {
+  background: #e9efe9;
+}
+
+.fs-auth-quote {
+  max-width: 420px;
+}
+
+.fs-auth-quote h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  color: #f6f8f5;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.fs-auth-quote p {
+  margin: 0;
+  color: #a9b7ae;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.fs-auth-points {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.fs-auth-points li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  color: #cdd8d0;
+}
+
+.fs-auth-points vaadin-icon {
+  width: 14px;
+  height: 14px;
+  color: #7fcca7;
+  margin-top: 3px;
+  flex: none;
+}
+
+.fs-auth-figure {
+  border: 1px solid rgba(233, 239, 233, 0.12);
+  border-radius: 12px;
+  padding: 18px 20px;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.fs-auth-figure .label {
+  font-size: 0.75rem;
+  color: #93a399;
+}
+
+.fs-auth-figure .value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 4px;
+  color: #f6f8f5;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-auth-figure svg {
+  margin-top: 14px;
+  width: 100%;
+  height: 56px;
+  display: block;
+}
+
+.fs-auth-foot {
+  font-size: 0.75rem;
+  color: #7f8f85;
+}
+
+.fs-auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.fs-auth-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-auth-card h1 {
+  font-size: 1.5rem;
+  margin: 0 0 6px;
+  font-weight: 650;
+}
+
+.fs-auth-card .lead {
+  color: var(--fs-ink-2);
+  margin: 0 0 24px;
+  font-size: 0.9375rem;
+}
+
+.fs-auth-card vaadin-text-field, .fs-auth-card vaadin-email-field, .fs-auth-card vaadin-password-field {
+  width: 100%;
+}
+
+.fs-auth-card vaadin-button[theme~="primary"] {
+  width: 100%;
+  margin-top: 12px;
+  height: 42px;
+}
+
+.fs-auth-switch {
+  margin-top: 20px;
+  font-size: 0.875rem;
+  color: var(--fs-ink-2);
+  text-align: center;
+}
+
+.fs-auth-error {
+  margin-bottom: 12px;
+}
+
+/* ----------------------------------------------------------------------------- Import */
+
+vaadin-upload.fs-upload {
+  border: 1.5px dashed var(--fs-line-strong);
+  border-radius: var(--fs-radius);
+  background: var(--fs-surface-2);
+  padding: 28px 20px;
+  text-align: center;
+}
+
+vaadin-upload.fs-upload[dragover] {
+  border-color: var(--fs-accent);
+  background: var(--fs-accent-soft);
+}
+
+.fs-steps {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--fs-ink-3);
+  flex-wrap: wrap;
+}
+
+.fs-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fs-step .n {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--fs-line-strong);
+  display: grid;
+  place-items: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.fs-step.active {
+  color: var(--fs-ink);
+  font-weight: 600;
+}
+
+.fs-step.active .n {
+  background: var(--fs-ink);
+  color: var(--fs-ink-inverse);
+  border-color: var(--fs-ink);
+}
+
+.fs-step.done .n {
+  background: var(--fs-accent-soft);
+  color: var(--fs-accent);
+  border-color: transparent;
+}
+
+.fs-step-sep {
+  width: 24px;
+  height: 1px;
+  background: var(--fs-line-strong);
+}
+
+.fs-mapping {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px 12px;
+}
+
+.fs-stat-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+}
+
+.fs-stat-row b {
+  font-size: 1.125rem;
+  font-weight: 650;
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-stat-row span {
+  color: var(--fs-ink-3);
+  font-size: 0.8125rem;
+}
+
+/* ----------------------------------------------------------------------------- Settings */
+
+.fs-settings-section {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--fs-line);
+}
+
+.fs-settings-section:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.fs-settings-section h3 {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.fs-settings-section p {
+  margin: 4px 0 0;
+  color: var(--fs-ink-2);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.fs-settings-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 440px;
+}
+
+.fs-settings-fields vaadin-text-field, .fs-settings-fields vaadin-password-field,
+.fs-settings-fields vaadin-combo-box, .fs-settings-fields vaadin-email-field {
+  width: 100%;
+}
+
+.fs-settings-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.fs-privacy-list {
+  margin: 0;
+  padding-inline-start: 18px;
+  color: var(--fs-ink-2);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ----------------------------------------------------------------------------- Loading */
+
+.fs-loading {
+  opacity: 0.55;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------------------------- Print (reports) */
+
+@media print {
+  vaadin-app-layout::part(drawer), vaadin-app-layout::part(navbar), .fs-no-print {
+    display: none !important;
+  }
+  vaadin-app-layout {
+    --vaadin-app-layout-drawer-width: 0;
+  }
+  html, body, .fs-page {
+    background: #fff !important;
+  }
+  .fs-page {
+    padding: 0;
+    max-width: none;
+  }
+  .fs-panel, .fs-kpis {
+    break-inside: avoid;
+  }
+}
+
+/* ----------------------------------------------------------------------------- Responsive */
+
+@media (max-width: 1100px) {
+  .fs-grid-2, .fs-grid-2.even {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  html:root {
+    --fs-gutter: 20px;
+  }
+  .fs-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fs-kpi:nth-child(3) {
+    border-inline-start: none;
+  }
+  .fs-kpi:nth-child(n + 3) {
+    border-top: 1px solid var(--fs-line);
+  }
+  .fs-kpis.three .fs-kpi:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  .fs-auth {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fs-auth-aside {
+    display: none;
+  }
+  .fs-mapping {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fs-settings-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  html:root {
+    --fs-gutter: 16px;
+  }
+  .fs-page {
+    padding-top: 20px;
+    gap: 18px;
+  }
+  .fs-page-title {
+    font-size: 1.3125rem;
+  }
+  .fs-kpi {
+    padding: 14px 16px;
+  }
+  .fs-kpi-value {
+    font-size: 1.3125rem;
+  }
+  .fs-form {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+  .fs-dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px 0;
+  }
+  .fs-dl dd {
+    margin-bottom: 8px;
+  }
+  .fs-panel-header {
+    padding: 14px 16px 0;
+  }
+  .fs-panel-body {
+    padding: 14px 16px 16px;
+  }
+  .fs-list-row, .fs-insight, .fs-panel-footer {
+    padding-inline: 16px;
+  }
+  .fs-mapping {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fs-page-actions {
+    width: 100%;
+  }
+  .fs-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-tooltip, .fs-loading {
+    transition: none;
+  }
+}

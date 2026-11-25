@@ -1,0 +1,10 @@
+target
+node_modules
+.env
+.env.*
+.git
+.idea
+.vscode
+src/main/frontend/generated
+src/main/bundles
+*.log

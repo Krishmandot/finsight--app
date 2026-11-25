@@ -1,0 +1,41 @@
+# Render Blueprint: creates the web service + a free PostgreSQL database in one click.
+# Render dashboard -> New -> Blueprint -> pick this repo.
+databases:
+  - name: finsight-db
+    databaseName: finsight
+    user: finsight
+    plan: free
+
+services:
+  - type: web
+    name: finsight
+    runtime: docker
+    plan: free
+    dockerfilePath: ./finsight-backend/Dockerfile
+    dockerContext: ./finsight-backend
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_HOST
+        fromDatabase:
+          name: finsight-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: finsight-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: finsight-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: finsight-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: finsight-db
+          property: password
+      - key: FINSIGHT_JWT_SECRET
+        generateValue: true
