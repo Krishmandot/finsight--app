@@ -9,6 +9,9 @@ import com.finsight.ui.support.Fmt;
 import com.finsight.ui.views.AnalyticsView;
 import com.finsight.ui.views.CategoriesView;
 import com.finsight.ui.views.DashboardView;
+import com.finsight.ui.views.HealthScoreView;
+import com.finsight.ui.views.SpendLeaksView;
+import com.finsight.ui.views.WhatIfView;
 import com.finsight.ui.views.ImportView;
 import com.finsight.ui.views.ReportsView;
 import com.finsight.ui.views.ReviewView;
@@ -89,8 +92,11 @@ public class MainLayout extends AppLayout implements AfterNavigationObserver {
             review,
             item("Import", ImportView.class, VaadinIcon.UPLOAD_ALT));
         SideNav insight = nav("Insights",
-            item("Analytics", AnalyticsView.class, VaadinIcon.BAR_CHART_H),
-            item("Reports", ReportsView.class, VaadinIcon.FILE_TEXT_O));
+    item("Analytics", AnalyticsView.class, VaadinIcon.BAR_CHART_H),
+    item("Health Score", HealthScoreView.class, VaadinIcon.HEART_O),
+    item("SpendLeaks", SpendLeaksView.class, VaadinIcon.WARNING),
+    item("What-If", WhatIfView.class, VaadinIcon.SLIDERS),
+    item("Reports", ReportsView.class, VaadinIcon.FILE_TEXT_O));
         SideNav manage = nav("Manage",
             item("Categories", CategoriesView.class, VaadinIcon.TAGS),
             item("Settings", SettingsView.class, VaadinIcon.COG_O));
