@@ -1,6 +1,7 @@
 package com.finsight.ui.views;
 
 import com.finsight.api.dto.response.TransactionResponse;
+import com.finsight.api.exception.BusinessRuleException;
 import com.finsight.domain.enums.TransactionReviewStatus;
 import com.finsight.service.transaction.TransactionFilter;
 import com.finsight.service.transaction.TransactionService;
@@ -45,6 +46,7 @@ public class ReviewView extends AppPage implements BeforeEnterObserver {
     private final Checkbox duplicatesOnly = new Checkbox("Only possible duplicates");
     private final Button approve = new Button("Approve selected");
     private final Button reject = new Button("Reject selected");
+    private final Button selectAll = new Button("Select all");
     private final PageHeader header = new PageHeader("Review", "");
     private final Div batchNotice = new Div();
     private UUID batchId;
@@ -59,7 +61,9 @@ public class ReviewView extends AppPage implements BeforeEnterObserver {
         reject.addClickListener(e -> bulk(TransactionReviewStatus.REJECTED));
         Button rejectDuplicates = new Button("Reject all duplicates", e -> rejectDuplicates());
         rejectDuplicates.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        header.actions(rejectDuplicates, reject, approve);
+        selectAll.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        selectAll.addClickListener(e -> toggleSelectAll());
+        header.actions(selectAll, rejectDuplicates, reject, approve);
         duplicatesOnly.addValueChangeListener(e -> refresh());
 
         grid.addClassName("fs-table");
@@ -123,9 +127,32 @@ public class ReviewView extends AppPage implements BeforeEnterObserver {
         if (ids.isEmpty()) {
             return;
         }
-        int updated = transactionService.bulkReview(currentUser.id(), ids, status);
-        Toasts.success(updated + (status == TransactionReviewStatus.APPROVED ? " approved" : " rejected"));
-        changed();
+        try {
+            int updated = transactionService.bulkReview(currentUser.id(), ids, status);
+            Toasts.success(updated + (status == TransactionReviewStatus.APPROVED ? " approved" : " rejected"));
+            changed();
+        } catch (BusinessRuleException ex) {
+            Toasts.error(ex.getMessage());
+        }
+    }
+
+    /** Selects every waiting transaction (up to the bulk limit), or clears the selection if there is one. */
+    private void toggleSelectAll() {
+        if (!grid.getSelectedItems().isEmpty()) {
+            grid.deselectAll();
+            return;
+        }
+        List<TransactionResponse> all = transactionService.findForExport(currentUser.id(), filter());
+        if (all.isEmpty()) {
+            Toasts.info("Nothing is waiting for review");
+            return;
+        }
+        List<TransactionResponse> chunk = all.stream().limit(TransactionService.MAX_BULK).toList();
+        grid.asMultiSelect().select(chunk.toArray(new TransactionResponse[0]));
+        if (all.size() > chunk.size()) {
+            Toasts.info("Selected the first " + chunk.size() + " of " + all.size()
+                + ". Approve them, then select the rest.");
+        }
     }
 
     private void rejectDuplicates() {
@@ -160,5 +187,6 @@ public class ReviewView extends AppPage implements BeforeEnterObserver {
         reject.setEnabled(selected > 0);
         approve.setText(selected > 0 ? "Approve " + selected : "Approve selected");
         reject.setText(selected > 0 ? "Reject " + selected : "Reject selected");
+        selectAll.setText(selected > 0 ? "Clear selection" : "Select all");
     }
 }
